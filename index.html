@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thaisa Lingerie</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVEGAÇÃO ===== -->
+  <nav class="nav">
+    <div class="nav__logo">Thaisa <span>Lingerie</span></div>
+    <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="admin.html" class="nav__admin-link" title="Área Administrativa">⚙️ Admin</a></li>
+    </ul>
+
+    <!-- Botão carrinho no nav -->
+    <button class="nav__cart-btn" id="btn-abrir-carrinho" aria-label="Carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="nav__cart-badge" id="cart-badge" hidden>0</span>
+    </button>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <span class="hero__tag">✦ Coleção 2026 ✦</span>
+    <h1 class="hero__title">Lingerie que <em>celebra</em><br>quem você é</h1>
+    <p class="hero__subtitle">Delicadeza, conforto e feminilidade em cada peça. Feito para você se sentir linda todos os dias.</p>
+    <a href="#catalogo" class="btn btn--primary">Ver Catálogo</a>
+  </section>
+
+  <!-- ===== CATÁLOGO ===== -->
+  <section class="catalog-section" id="catalogo">
+    <div class="section-header">
+      <span class="section-header__eyebrow">✦ Nossa Coleção ✦</span>
+      <h2 class="section-header__title">Peças que fazem você se <em>apaixonar</em></h2>
+      <div class="section-header__divider"></div>
+    </div>
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="catalog" id="catalog-grid"></div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="about" id="sobre">
+    <h2 class="about__title">Por que escolher a <em>Thaisa?</em></h2>
+    <p class="about__text">Somos apaixonadas por lingerie que mistura delicadeza com conforto real. Cada peça é cuidadosamente selecionada para fazer você se sentir especial, dentro e fora.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature__icon">🎀</div>
+        <div class="feature__title">Qualidade Premium</div>
+        <div class="feature__desc">Tecidos selecionados</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">📦</div>
+        <div class="feature__title">Entrega Rápida</div>
+        <div class="feature__desc">No conforto de sua casa</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">💬</div>
+        <div class="feature__title">Atendimento via WhatsApp</div>
+        <div class="feature__desc">Rápido e personalizado</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contato">
+    <strong>Thaisa Lingerie</strong> · Atendimento pelo WhatsApp · © 2026
+  </footer>
+
+  <!-- ===== GAVETA DO CARRINHO ===== -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__titulo">🛍 Meu Carrinho</h2>
+      <button class="cart-drawer__fechar" id="btn-fechar-carrinho" aria-label="Fechar carrinho">✕</button>
+    </div>
+
+    <div class="cart-drawer__corpo" id="cart-corpo" hidden>
+      <!-- Itens gerados por JS -->
+    </div>
+
+    <div class="cart-drawer__vazio" id="cart-vazio">
+      <span class="cart-vazio__icone">🛒</span>
+      <p>Seu carrinho está vazio.</p>
+      <small>Adicione produtos para continuar.</small>
+    </div>
+
+    <div class="cart-drawer__footer" id="cart-footer" hidden>
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total-valor">R$ 0,00</strong>
+      </div>
+      <button class="btn btn--whatsapp btn--full" id="btn-finalizar-pedido">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M11.998 0C5.373 0 0 5.373 0 12c0 2.117.553 4.1 1.518 5.823L.057 23.997l6.325-1.43A11.932 11.932 0 0011.998 24c6.627 0 12-5.373 12-12s-5.373-12-12-12zm0 21.818a9.813 9.813 0 01-5.003-1.372l-.36-.213-3.75.848.873-3.648-.234-.374A9.79 9.79 0 012.181 12c0-5.418 4.4-9.818 9.817-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.417-4.4 9.818-9.818 9.818z"/>
+        </svg>
+        Finalizar Pedido pelo WhatsApp
+      </button>
+      <button class="btn btn--outline btn--full" id="btn-limpar-carrinho">Limpar carrinho</button>
+    </div>
+  </aside>
+
+  <!-- ===== TOAST FEEDBACK ===== -->
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="produtos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

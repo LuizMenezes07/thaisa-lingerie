@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Thaisa Lingerie</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== TELA DE LOGIN ===== -->
+  <div id="tela-login" class="login-overlay">
+    <div class="login-box">
+      <div class="login-logo">Thaisa <span>Admin</span></div>
+      <p class="login-sub">Área restrita — faça login para continuar</p>
+      <div class="campo">
+        <label for="login-usuario">Usuário</label>
+        <input type="text" id="login-usuario" placeholder="seu usuário" autocomplete="username" class="campo__input" />
+      </div>
+      <div class="campo">
+        <label for="login-senha">Senha</label>
+        <input type="password" id="login-senha" placeholder="sua senha" autocomplete="current-password" class="campo__input" />
+      </div>
+      <p id="login-erro" class="login-erro" hidden>Usuário ou senha incorretos.</p>
+      <button class="btn btn--primario" id="btn-login">Entrar</button>
+    </div>
+  </div>
+
+  <!-- ===== PAINEL ADMIN ===== -->
+  <div id="painel" hidden>
+
+    <!-- Navbar -->
+    <nav class="admin-nav">
+      <div class="admin-nav__logo">Thaisa <span>Admin</span></div>
+      <div class="admin-nav__acoes">
+        <a href="index.html" target="_blank" class="btn btn--outline">Ver Site</a>
+        <button class="btn btn--ghost" id="btn-sair">Sair</button>
+      </div>
+    </nav>
+
+    <!-- Abas -->
+    <div class="abas-bar">
+      <button class="aba" id="aba-produtos">Produtos</button>
+      <button class="aba" id="aba-categorias">Categorias</button>
+    </div>
+
+    <main class="admin-main">
+
+      <!-- ===== SEÇÃO PRODUTOS ===== -->
+      <section id="secao-produtos">
+        <div class="admin-header">
+          <div>
+            <h1 class="admin-titulo">Produtos</h1>
+            <p class="admin-subtitulo" id="contagem-produtos"></p>
+          </div>
+          <button class="btn btn--primario" id="btn-novo-produto">+ Novo Produto</button>
+        </div>
+
+        <div class="admin-filtro">
+          <input type="text" id="busca" placeholder="🔍  Buscar produto..." class="campo__input campo__input--busca" />
+          <select id="filtro-categoria" class="campo__select"></select>
+        </div>
+
+        <div class="tabela-wrapper">
+          <table class="tabela" id="tabela-produtos">
+            <thead>
+              <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Badge</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-corpo"></tbody>
+          </table>
+          <p id="tabela-vazia" class="tabela-vazia" hidden>Nenhum produto encontrado.</p>
+        </div>
+      </section>
+
+      <!-- ===== SEÇÃO CATEGORIAS ===== -->
+      <section id="secao-categorias" hidden>
+        <div class="admin-header">
+          <div>
+            <h1 class="admin-titulo">Categorias</h1>
+            <p class="admin-subtitulo" id="contagem-categorias"></p>
+          </div>
+          <button class="btn btn--primario" id="btn-nova-categoria">+ Nova Categoria</button>
+        </div>
+
+        <div class="tabela-wrapper">
+          <table class="tabela">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>ID interno</th>
+                <th>Produtos</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-cat-corpo"></tbody>
+          </table>
+          <p id="tabela-cat-vazia" class="tabela-vazia" hidden>Nenhuma categoria cadastrada.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== MODAL: FORMULÁRIO DE PRODUTO ===== -->
+  <div class="modal-overlay" id="modal-produto" hidden>
+    <div class="modal-form">
+      <div class="modal-form__header">
+        <h2 class="modal-form__titulo" id="modal-form-titulo">Novo Produto</h2>
+        <button class="modal-form__fechar" id="btn-fechar-modal" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-form__corpo">
+
+        <div class="campo campo--foto">
+          <label>Fotos do Produto</label>
+          <div class="upload-duplo">
+
+            <div class="upload-slot">
+              <span class="upload-slot__label">📸 Frente <span class="obrigatorio">*</span></span>
+              <div class="upload-area" id="upload-area-frente">
+                <img id="preview-frente" src="" alt="Frente" hidden />
+                <div id="upload-placeholder-frente" class="upload-placeholder">
+                  <span class="upload-icone">📷</span>
+                  <span>Clique ou arraste</span>
+                  <span class="upload-dica">Foto frontal</span>
+                </div>
+                <input type="file" id="input-foto-frente" accept="image/*" hidden />
+              </div>
+              <button class="btn btn--ghost btn--pequeno" id="btn-remover-frente" hidden>Remover</button>
+            </div>
+
+            <div class="upload-slot">
+              <span class="upload-slot__label">🔄 Verso <span class="campo__dica">(opcional)</span></span>
+              <div class="upload-area" id="upload-area-verso">
+                <img id="preview-verso" src="" alt="Verso" hidden />
+                <div id="upload-placeholder-verso" class="upload-placeholder">
+                  <span class="upload-icone">🔄</span>
+                  <span>Clique ou arraste</span>
+                  <span class="upload-dica">Foto das costas</span>
+                </div>
+                <input type="file" id="input-foto-verso" accept="image/*" hidden />
+              </div>
+              <button class="btn btn--ghost btn--pequeno" id="btn-remover-verso" hidden>Remover</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="campo-nome">Nome <span class="obrigatorio">*</span></label>
+          <input type="text" id="campo-nome" placeholder="Ex: Conjunto Rendado Rosa" class="campo__input" />
+        </div>
+
+        <div class="campo">
+          <label for="campo-descricao">Descrição</label>
+          <input type="text" id="campo-descricao" placeholder="Ex: Sutiã + calcinha em renda delicada" class="campo__input" />
+        </div>
+
+        <div class="campo-grupo">
+          <div class="campo">
+            <label for="campo-preco">Preço <span class="obrigatorio">*</span></label>
+            <input type="text" id="campo-preco" placeholder="Ex: R$ 129,90" class="campo__input" />
+          </div>
+          <div class="campo">
+            <label for="campo-preco-antigo">Preço antigo <span class="campo__dica">(opcional)</span></label>
+            <input type="text" id="campo-preco-antigo" placeholder="Ex: R$ 159,90" class="campo__input" />
+          </div>
+        </div>
+
+        <div class="campo-grupo">
+          <div class="campo">
+            <label for="campo-categoria">Categoria <span class="obrigatorio">*</span></label>
+            <select id="campo-categoria" class="campo__select"></select>
+          </div>
+          <div class="campo">
+            <label for="campo-badge">Etiqueta</label>
+            <select id="campo-badge" class="campo__select">
+              <option value="">Sem etiqueta</option>
+              <option value="novo">🟡 Novo</option>
+              <option value="oferta">🔴 Oferta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="campo-emoji">Emoji <span class="campo__dica">(usado quando não há foto)</span></label>
+          <input type="text" id="campo-emoji" placeholder="Ex: 👙" class="campo__input campo__input--emoji" maxlength="4" />
+        </div>
+
+      </div>
+      <div class="modal-form__rodape">
+        <p id="form-erro" class="form-erro" hidden></p>
+        <button class="btn btn--outline" id="btn-cancelar">Cancelar</button>
+        <button class="btn btn--primario" id="btn-salvar">Salvar Produto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: FORMULÁRIO DE CATEGORIA ===== -->
+  <div class="modal-overlay" id="modal-categoria" hidden>
+    <div class="modal-form modal-form--pequeno">
+      <div class="modal-form__header">
+        <h2 class="modal-form__titulo" id="modal-cat-titulo">Nova Categoria</h2>
+        <button class="modal-form__fechar" id="btn-fechar-modal-cat" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-form__corpo">
+
+        <div class="campo">
+          <label for="cat-campo-label">Nome da Categoria <span class="obrigatorio">*</span></label>
+          <input type="text" id="cat-campo-label" placeholder="Ex: Pijamas" class="campo__input" />
+        </div>
+
+        <div class="campo">
+          <label for="cat-campo-id">ID interno <span class="campo__dica">(gerado automaticamente)</span></label>
+          <input type="text" id="cat-campo-id" placeholder="Ex: pijamas" class="campo__input" />
+          <small class="campo__ajuda">O ID é usado para identificar a categoria internamente. Não use espaços ou acentos.</small>
+        </div>
+
+      </div>
+      <div class="modal-form__rodape">
+        <p id="cat-form-erro" class="form-erro" hidden></p>
+        <button class="btn btn--outline" id="btn-cancelar-cat">Cancelar</button>
+        <button class="btn btn--primario" id="btn-salvar-cat">Salvar Categoria</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: CONFIRMAR EXCLUSÃO DE PRODUTO ===== -->
+  <div class="modal-overlay" id="modal-excluir" hidden>
+    <div class="modal-confirm">
+      <p class="modal-confirm__msg" id="msg-excluir">Tem certeza que deseja excluir este produto?</p>
+      <div class="modal-confirm__acoes">
+        <button class="btn btn--outline" id="btn-cancelar-excluir">Cancelar</button>
+        <button class="btn btn--perigo"  id="btn-confirmar-excluir">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: CONFIRMAR EXCLUSÃO DE CATEGORIA ===== -->
+  <div class="modal-overlay" id="modal-excluir-cat" hidden>
+    <div class="modal-confirm">
+      <p class="modal-confirm__msg">Tem certeza que deseja excluir esta categoria?</p>
+      <div class="modal-confirm__acoes">
+        <button class="btn btn--outline" id="btn-cancelar-excluir-cat">Cancelar</button>
+        <button class="btn btn--perigo"  id="btn-confirmar-excluir-cat">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="produtos.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
