@@ -61,23 +61,6 @@ thaisa-lingerie/
 
 ---
 
-## 🚀 Como publicar
-
-### Netlify (recomendado)
-1. Configure o WhatsApp em `produtos.js` e as credenciais em `admin.js`
-2. Acesse [netlify.com](https://netlify.com) e crie uma conta gratuita
-3. Arraste a pasta do projeto para a área de deploy
-4. O site estará no ar com um link público ✅
-
-### Atualizar o site no Netlify
-1. Acesse seu site no Netlify → aba **Deploys**
-2. Arraste a pasta atualizada para a área de deploy
-
-### GitHub Pages
-1. Configure os arquivos como indicado acima
-2. Suba para um repositório no GitHub
-3. Vá em **Settings → Pages**, selecione a branch `main` e clique em **Save**
-
 ---
 
 ## 🛠 Tecnologias
