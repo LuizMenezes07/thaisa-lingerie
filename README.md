@@ -72,9 +72,4 @@ thaisa-lingerie/
 
 ---
 
-## 📱 Acesso ao Admin
 
-Após publicar, acesse o painel em:
-```
-https://thaisalingerie.netlify.app/admin.html
-```
